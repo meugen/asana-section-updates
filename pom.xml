@@ -61,7 +61,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>meugeninua.asana.sectionupdates.Program</mainClass>
+                            <mainClass>meugeninua.asana.taskupdates.Program</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

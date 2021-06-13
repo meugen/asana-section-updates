@@ -1,4 +1,4 @@
-package meugeninua.asana.sectionupdates.app.models;
+package meugeninua.asana.taskupdates.app.models;
 
 public class AddProjectBody {
 

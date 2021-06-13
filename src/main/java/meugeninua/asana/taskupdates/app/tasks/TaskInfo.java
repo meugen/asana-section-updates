@@ -1,4 +1,4 @@
-package meugeninua.asana.sectionupdates.app.tasks;
+package meugeninua.asana.taskupdates.app.tasks;
 
 import java.util.Objects;
 

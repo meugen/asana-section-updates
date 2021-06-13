@@ -1,6 +1,6 @@
-package meugeninua.asana.sectionupdates.app;
+package meugeninua.asana.taskupdates.app;
 
-import meugeninua.asana.sectionupdates.app.tasks.TaskInfo;
+import meugeninua.asana.taskupdates.app.tasks.TaskInfo;
 
 import java.util.HashMap;
 import java.util.Map;

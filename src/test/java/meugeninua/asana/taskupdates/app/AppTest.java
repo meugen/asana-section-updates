@@ -1,9 +1,7 @@
-package meugeninua.asana.sectionupdates;
+package meugeninua.asana.taskupdates.app;
 
-import meugeninua.asana.sectionupdates.app.App;
-import meugeninua.asana.sectionupdates.app.Args;
-import meugeninua.asana.sectionupdates.app.tasks.TaskInfo;
-import meugeninua.asana.sectionupdates.app.tasks.TaskMover;
+import meugeninua.asana.taskupdates.app.tasks.TaskInfo;
+import meugeninua.asana.taskupdates.app.tasks.TaskUpdater;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import static org.mockito.ArgumentMatchers.any;
 
@@ -23,9 +22,9 @@ public class AppTest {
     private static final String SECTION_ID = "section_id";
 
     @Mock
-    private TaskMover mover;
+    private TaskUpdater mover;
     @Mock
-    private TaskMover.Request request;
+    private Consumer<TaskInfo> request;
     @Mock
     private Args args;
     private AutoCloseable closeable;
@@ -62,7 +61,7 @@ public class AppTest {
         app.run();
 
         // than
-        Mockito.verify(request, Mockito.times(2)).moveToSection(any());
+        Mockito.verify(request, Mockito.times(2)).accept(any());
     }
 
     @Test
@@ -79,7 +78,7 @@ public class AppTest {
 
         // than
         var taskCaptor = ArgumentCaptor.forClass(TaskInfo.class);
-        Mockito.verify(request).moveToSection(taskCaptor.capture());
+        Mockito.verify(request).accept(taskCaptor.capture());
         Assert.assertEquals(taskCaptor.getValue(),
             new TaskInfo("1200462412996304", "1200462412996313")
         );
