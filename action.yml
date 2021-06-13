@@ -28,6 +28,8 @@ runs:
     - ${{ inputs.token }}
     - '-section'
     - ${{ inputs.section }}
+    - '-comment'
+    - ${{ inputs.comment }}
     - '-project-id'
     - ${{ inputs.project-id }}
     - '-task-id'
