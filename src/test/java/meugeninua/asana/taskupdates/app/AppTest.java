@@ -55,7 +55,6 @@ public class AppTest {
             + "https://app.asana.com/0/1200462412996304/1200462412996313 \n"
             + "additional notes";
         Mockito.when(args.getComment()).thenReturn(Optional.of(comment));
-        Mockito.when(args.getTask()).thenReturn(Optional.empty());
 
         // when
         app.run();
@@ -71,7 +70,6 @@ public class AppTest {
             + "https://app.asana.com/0/1200462412996304/1200462412996313 \n"
             + "additional notes";
         Mockito.when(args.getComment()).thenReturn(Optional.of(comment));
-        Mockito.when(args.getTask()).thenReturn(Optional.empty());
 
         // when
         app.run();

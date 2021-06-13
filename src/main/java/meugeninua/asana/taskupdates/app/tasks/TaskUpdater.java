@@ -1,19 +1,17 @@
 package meugeninua.asana.taskupdates.app.tasks;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import meugeninua.asana.taskupdates.app.models.AddProjectBody;
+import meugeninua.asana.taskupdates.app.tasks.requests.MarkCompletedRequest;
 import meugeninua.asana.taskupdates.app.tasks.requests.MoveToSectionRequest;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class TaskUpdater {
+
+    private static final String UPDATE_ALL = "all";
+    private static final String UPDATE_SECTION = "section";
+    private static final String UPDATE_COMPLETED = "completed";
 
     private final HttpClient httpClient;
 
@@ -22,10 +20,30 @@ public class TaskUpdater {
     }
 
     public Consumer<TaskInfo> makeRequest(String token, String sectionId) {
-        return new MoveToSectionRequest(
-            httpClient,
-            Objects.requireNonNull(token),
-            Objects.requireNonNull(sectionId)
+        return makeRequest(UPDATE_ALL, token, sectionId);
+    }
+
+    public Consumer<TaskInfo> makeRequest(String updates, String token, String sectionId) {
+        var updatesSet = new HashSet<>(
+            Arrays.asList(updates.split(","))
         );
+
+        Consumer<TaskInfo> request = t -> { };
+        if (isUpdateNeeded(updatesSet, UPDATE_SECTION)) {
+            request = request.andThen(
+                new MoveToSectionRequest(httpClient, token, sectionId)
+            );
+        }
+        if (isUpdateNeeded(updatesSet, UPDATE_COMPLETED)) {
+            request = request.andThen(
+                new MarkCompletedRequest(httpClient, token)
+            );
+        }
+        return request;
+    }
+
+    private boolean isUpdateNeeded(Set<String> updates, String update) {
+        if (updates.contains(UPDATE_ALL)) return true;
+        return updates.contains(update);
     }
 }

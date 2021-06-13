@@ -16,7 +16,11 @@ public class App {
     }
 
     public void run() {
-        var request = mover.makeRequest(args.getToken(), args.getSection());
+        var request = args.getUpdates().map(
+            updates -> mover.makeRequest(updates, args.getToken(), args.getSection())
+        ).orElseGet(
+            () -> mover.makeRequest(args.getToken(), args.getSection())
+        );
         args.getComment().ifPresent(comment -> {
             new TasksIterable(comment).forEach(request);
         });

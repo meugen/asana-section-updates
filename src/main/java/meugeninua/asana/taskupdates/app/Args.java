@@ -14,6 +14,7 @@ public class Args {
     private static final String KEY_COMMENT = "comment";
     private static final String KEY_PROJECT_ID = "project-id";
     private static final String KEY_TASK_ID = "task-id";
+    private static final String KEY_UPDATES = "updates";
 
     public static Args from(String[] args) {
         var arguments = new HashMap<String, String>();
@@ -54,5 +55,9 @@ public class Args {
         var taskId = arguments.get(KEY_TASK_ID);
         if (projectId == null || taskId == null) return Optional.empty();
         return Optional.of(new TaskInfo(projectId, taskId));
+    }
+
+    public Optional<String> getUpdates() {
+        return Optional.ofNullable(arguments.get(KEY_UPDATES));
     }
 }
