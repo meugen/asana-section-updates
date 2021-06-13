@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>meugeninua.asana.sectionupdates</groupId>
-    <artifactId>asana-section-updates</artifactId>
+    <artifactId>asana-task-updates</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
