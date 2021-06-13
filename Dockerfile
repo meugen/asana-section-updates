@@ -7,4 +7,4 @@ RUN mvn package
 FROM openjdk:11-jre-slim
 COPY --from=maven /app/target/asana-task-updates-1.0-SNAPSHOT-jar-with-dependencies.jar /app/
 WORKDIR /app/
-ENTRYPOINT ["java", "-jar", "asana-task-updates-1.0-SNAPSHOT-jar-with-dependencies.jar"]
+ENTRYPOINT ["java", "-jar", "/app/asana-task-updates-1.0-SNAPSHOT-jar-with-dependencies.jar"]
