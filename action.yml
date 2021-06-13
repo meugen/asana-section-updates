@@ -4,28 +4,22 @@ inputs:
   token:
     description: 'Personal token from Asana'
     required: true
-
   section:
     description: 'Section id in Asana project'
     required: true
-
   comment:
     description: 'Comment to find asana tasks'
     required: false
-
   project-id:
     description: 'Id of project in Asana'
     required: false
-
   task-id:
     description: 'Id of task in Asana'
     required: false
-
   updates:
     description: 'Tasks updates to run'
     required: false
     default: 'all'
-
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -33,10 +27,10 @@ runs:
     - '-token'
     - ${{ inputs.token }}
     - '-section'
-    - ${{ input.section }}
+    - ${{ inputs.section }}
     - '-project-id'
-    - ${{ input.project-id }}
+    - ${{ inputs.project-id }}
     - '-task-id'
-    - ${{ input.task-id }}
+    - ${{ inputs.task-id }}
     - '-updates'
-    - ${{ input.updates }}
+    - ${{ inputs.updates }}
